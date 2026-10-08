@@ -124,7 +124,7 @@ body.is-loaded .Page{
   padding-block:2vh 6vh;
 }
 .HeroLogo{
-  width:clamp(280px,32vw,560px);
+  width:clamp(220px,32vw,560px);
   height:auto;
   margin-bottom:2.5rem;
   filter:brightness(0) invert(1);
@@ -133,13 +133,10 @@ body.is-loaded .Page{
   font-size:clamp(2rem,3.6vw,3.5rem);
   font-weight:700;
   letter-spacing:-0.035em;
-  background:linear-gradient(180deg,#ffffff 0%,#c8c8d0 130%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
   margin-bottom:1.25rem;
   display:inline-block;
   position:relative;
+  color:var(--T1);
 }
 .HeroWord{
   position:relative;
@@ -337,6 +334,62 @@ body.is-loaded .HeroLine path{
 }
 .FootNav a:hover{
   color:var(--T1);
+}
+
+@media (max-width:900px){
+  :root{
+    --PadX:5vw;
+    --PadY:4vh;
+    --PageMax:100vw;
+    --Cont:100%;
+    --Base:clamp(15px, 4vw, 18px);
+  }
+  .Page{
+    padding-inline:var(--PadX);
+  }
+  .Hero{
+    padding-block:1vh 5vh;
+  }
+  .HeroLogo{
+    width:min(80vw, 360px);
+    margin-bottom:2rem;
+  }
+  .HeroTitle{
+    font-size:clamp(1.75rem,8vw,2.5rem);
+    letter-spacing:-0.03em;
+  }
+  .HeroLead{
+    font-size:1em;
+    max-width:100%;
+  }
+  .HeroLinks{
+    gap:0.6rem;
+  }
+  .HeroLink{
+    flex:1 1 auto;
+    justify-content:center;
+    padding:0.75em 1em;
+  }
+  .FaqATxt{
+    max-width:100%;
+  }
+  .Div{
+    margin-block:0.75rem 4vh;
+  }
+}
+
+@media (max-width:420px){
+  .HeroLogo{
+    width:min(85vw, 320px);
+  }
+  .HeroLinks{
+    flex-direction:column;
+    align-items:stretch;
+    width:100%;
+  }
+  .HeroLink{
+    width:100%;
+  }
 }
 
 @media (prefers-reduced-motion:reduce){
