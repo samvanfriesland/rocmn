@@ -206,10 +206,7 @@ body.is-loaded .Side{
   font-size:clamp(2rem,3.4vw,3rem);
   font-weight:700;
   letter-spacing:-0.03em;
-  background:linear-gradient(180deg,#ffffff 0%,#c8c8d0 130%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+  color:var(--T1);
   margin-bottom:0.6em;
 }
 .HeadLead{
@@ -334,12 +331,14 @@ body.is-loaded .Side{
   width:100%;
   aspect-ratio:16/10;
   overflow:hidden;
+  touch-action:pan-y;
 }
 .CarTrack{
   display:flex;
   height:100%;
   width:100%;
   transition:transform .45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change:transform;
 }
 .CarSlide{
   flex:0 0 100%;
@@ -348,11 +347,16 @@ body.is-loaded .Side{
   display:flex;
   align-items:center;
   justify-content:center;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-user-drag:none;
 }
 .CarSlide img{
   width:100%;
   height:100%;
   object-fit:contain;
+  pointer-events:none;
+  -webkit-user-drag:none;
 }
 .CarNav{
   position:absolute;
@@ -550,9 +554,56 @@ body.is-loaded .Side{
   color:var(--T1);
 }
 
-@media (prefers-reduced-motion:reduce){
-  .LoaderSpin{animation:none}
-  .Mod,.ModPan{transition:none}
+@media (max-width:900px){
+  :root{
+    --PadX:5vw;
+    --PadY:4vh;
+    --ToolGap:6vh;
+    --PageMax:100vw;
+    --Base:clamp(15px, 4vw, 18px);
+  }
+  .Page{
+    padding-inline:var(--PadX);
+  }
+  .Head{
+    margin-top:4vh;
+    margin-bottom:6vh;
+    max-width:100%;
+  }
+  .HeadTitle{
+    font-size:clamp(1.75rem,8vw,2.5rem);
+    letter-spacing:-0.03em;
+  }
+  .HeadLead{
+    font-size:1em;
+  }
+  .Tool{
+    gap:4vh;
+  }
+  .ToolTitle{
+    font-size:clamp(1.35rem,6vw,1.75rem);
+    letter-spacing:-0.02em;
+  }
+  .ToolDesc{
+    font-size:1em;
+    max-width:100%;
+  }
+  .ToolAct{
+    font-size:1.05em;
+  }
+  .CarNav{
+    font-size:1.5rem;
+    padding:2vw;
+  }
+  .CarNavPrev{left:1.5vw}
+  .CarNavNext{right:1.5vw}
+}
+
+@media (max-width:420px){
+  .ToolAct{
+    width:100%;
+    justify-content:space-between;
+  }
 }
 </style>
 </head>
@@ -880,6 +931,7 @@ const DlBase = "https://rocmn.pythonanywhere.com/download/";
 
 (() => {
   document.querySelectorAll("[data-carousel]").forEach((Root) => {
+    const View = Root.querySelector(".CarView");
     const Track = Root.querySelector(".CarTrack");
     const Slides = Root.querySelectorAll(".CarSlide");
     const Prev = Root.querySelector(".CarNavPrev");
@@ -887,8 +939,19 @@ const DlBase = "https://rocmn.pythonanywhere.com/download/";
     const Dots = Root.querySelectorAll(".CarDot");
     const Tot = Slides.length;
     let Ix = 0;
+    let StartX = 0;
+    let StartY = 0;
+    let Drag = false;
+    let Lock = null;
+    let Offset = 0;
+
+    const SetX = (Pct, Anim) => {
+      Track.style.transition = Anim ? "" : "none";
+      Track.style.transform = "translateX(" + Pct + "%)";
+    };
 
     const Draw = () => {
+      Track.style.transition = "";
       Track.style.transform = "translateX(" + (-Ix * 100) + "%)";
 
       Dots.forEach((D, I) => {
@@ -921,6 +984,70 @@ const DlBase = "https://rocmn.pythonanywhere.com/download/";
     Root.addEventListener("keydown", (E) => {
       if (E.key === "ArrowLeft")  Go(Ix - 1);
       if (E.key === "ArrowRight") Go(Ix + 1);
+    });
+
+    View.addEventListener("touchstart", (E) => {
+      if (Tot <= 1) return;
+      const T = E.touches[0];
+      StartX = T.clientX;
+      StartY = T.clientY;
+      Drag = true;
+      Lock = null;
+      Offset = 0;
+      Track.style.transition = "none";
+    }, { passive: true });
+
+    View.addEventListener("touchmove", (E) => {
+      if (!Drag) return;
+      const T = E.touches[0];
+      const Dx = T.clientX - StartX;
+      const Dy = T.clientY - StartY;
+
+      if (Lock === null) {
+        Lock = Math.abs(Dx) > Math.abs(Dy) ? "x" : "y";
+      }
+      if (Lock === "y") {
+        Drag = false;
+        Track.style.transition = "";
+        Track.style.transform = "translateX(" + (-Ix * 100) + "%)";
+        return;
+      }
+
+      E.preventDefault();
+
+      const W = View.clientWidth || 1;
+      let Pct = Dx / W * 100;
+
+      if ((Ix === 0 && Pct > 0) || (Ix === Tot - 1 && Pct < 0)) {
+        Pct *= 0.35;
+      }
+
+      Offset = Pct;
+      Track.style.transform = "translateX(" + (-Ix * 100 + Pct) + "%)";
+    }, { passive: false });
+
+    View.addEventListener("touchend", () => {
+      if (!Drag) return;
+      Drag = false;
+
+      const W = View.clientWidth || 1;
+      const Threshold = W * 0.18;
+
+      if (Offset * W / 100 > Threshold) {
+        Go(Ix - 1);
+      } else if (Offset * W / 100 < -Threshold) {
+        Go(Ix + 1);
+      } else {
+        Draw();
+      }
+
+      Offset = 0;
+    });
+
+    View.addEventListener("touchcancel", () => {
+      Drag = false;
+      Offset = 0;
+      Draw();
     });
 
     Draw();
