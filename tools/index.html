@@ -588,8 +588,8 @@ body.is-loaded .Side{
     font-size:1em;
     max-width:100%;
   }
-  .ToolAct{
-    font-size:1.05em;
+  .ToolActs{
+    display:none;
   }
   .CarNav{
     font-size:1.5rem;
@@ -597,13 +597,6 @@ body.is-loaded .Side{
   }
   .CarNavPrev{left:1.5vw}
   .CarNavNext{right:1.5vw}
-}
-
-@media (max-width:420px){
-  .ToolAct{
-    width:100%;
-    justify-content:space-between;
-  }
 }
 </style>
 </head>
@@ -944,11 +937,6 @@ const DlBase = "https://rocmn.pythonanywhere.com/download/";
     let Drag = false;
     let Lock = null;
     let Offset = 0;
-
-    const SetX = (Pct, Anim) => {
-      Track.style.transition = Anim ? "" : "none";
-      Track.style.transform = "translateX(" + Pct + "%)";
-    };
 
     const Draw = () => {
       Track.style.transition = "";
