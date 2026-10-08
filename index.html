@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocmn Cheats</title>
+<link rel="icon" href="https://rocmn.pythonanywhere.com/image/logo.png">
+
+<meta name="theme-color" content="#17171a">
+<meta property="og:title" content="Rocmn Cheats">
+<meta property="og:description" content="Een verzameling tools om je schooljaar net wat makkelijker te maken.">
+<meta property="og:image" content="https://rocmn.pythonanywhere.com/image/logo.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --Bg:#17171a;
+  --Card:#1e1e22;
+  --Line:#2e2e34;
+  --LineH:#4a4a52;
+  --T1:#ffffff;
+  --T2:#b4b4bc;
+  --T3:#7a7a83;
+  --Acc:#ffffff;
+  --R:8px;
+  --Rs:6px;
+  --Ff:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --PadX:4vw;
+  --PadY:5vh;
+  --PageMax:92vw;
+  --Cont:56vw;
+  --Base:clamp(15px, 1.05vw, 19px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+  font-size:var(--Base);
+}
+html::-webkit-scrollbar{display:none;width:0;height:0}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--T1);
+  font-family:var(--Ff);
+  font-size:1rem;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-color:var(--Bg);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(circle at 85% 90%, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(rgba(255,255,255,0.11) 1.2px, transparent 1.4px),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    1.5rem 1.5rem,
+    100% 100%;
+  background-attachment:fixed, fixed, fixed, fixed;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.02em;line-height:1.2}
+p{margin:0}
+p + p{margin-top:0.85rem}
+:focus-visible{outline:2px solid var(--Acc);outline-offset:3px;border-radius:var(--Rs)}
+
+.Loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--Bg);
+  opacity:1;
+  transition:opacity .5s ease;
+}
+.Loader.is-hidden{
+  opacity:0;
+  pointer-events:none;
+}
+.LoaderSpin{
+  width:2rem;
+  height:2rem;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.12);
+  border-top-color:#ffffff;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.Page{
+  max-width:var(--PageMax);
+  margin:0 auto;
+  padding:var(--PadY) var(--PadX);
+  opacity:0;
+  transition:opacity .6s ease;
+}
+body.is-loaded .Page{
+  opacity:1;
+}
+.Cont{
+  max-width:var(--Cont);
+  margin:0 auto;
+}
+
+.Hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding-block:2vh 6vh;
+}
+.HeroLogo{
+  width:clamp(280px,32vw,560px);
+  height:auto;
+  margin-bottom:2.5rem;
+  filter:brightness(0) invert(1);
+}
+.HeroTitle{
+  font-size:clamp(2rem,3.6vw,3.5rem);
+  font-weight:700;
+  letter-spacing:-0.035em;
+  background:linear-gradient(180deg,#ffffff 0%,#c8c8d0 130%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:1.25rem;
+  display:inline-block;
+  position:relative;
+}
+.HeroWord{
+  position:relative;
+  display:inline-block;
+}
+.HeroLead{
+  color:var(--T2);
+  font-size:1.05em;
+  line-height:1.6;
+  max-width:34rem;
+}
+
+.HeroLine{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-0.18em;
+  width:100%;
+  height:0.22em;
+  overflow:visible;
+  pointer-events:none;
+}
+.HeroLine path{
+  fill:none;
+  stroke:#ffffff;
+  stroke-width:8;
+  stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+  stroke-dasharray:200;
+  stroke-dashoffset:200;
+  opacity:0;
+}
+body.is-loaded .HeroLine path{
+  animation:
+    DrawLine 1.9s cubic-bezier(0.2, 0, 0, 1) 0.5s forwards,
+    FadeLine 0.28s ease-out 0.5s forwards;
+}
+@keyframes DrawLine{
+  from{stroke-dashoffset:200}
+  to{stroke-dashoffset:0}
+}
+@keyframes FadeLine{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.HeroLinks{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  margin-top:2rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.HeroLink{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.65em 1.15em;
+  border:1px solid var(--Line);
+  border-radius:var(--Rs);
+  color:var(--T1);
+  font-size:0.95em;
+  font-weight:500;
+  background:transparent;
+  transition:background-color .18s ease, border-color .18s ease;
+}
+.HeroLink:hover{
+  background:var(--Card);
+  border-color:var(--LineH);
+}
+.HeroLink i{
+  font-size:0.8em;
+  color:var(--T3);
+  transition:color .18s ease, transform .18s ease;
+}
+.HeroLink:hover i{
+  color:var(--T1);
+  transform:translateX(2px);
+}
+
+.Div{
+  height:1px;
+  background:linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.14) 15%,
+    rgba(255,255,255,0.28) 50%,
+    rgba(255,255,255,0.14) 85%,
+    transparent 100%
+  );
+  margin-block:1rem 5vh;
+}
+
+.FaqHead{
+  margin-bottom:1.75rem;
+}
+.FaqTitle{
+  font-size:1.15em;
+  font-weight:600;
+  color:var(--T1);
+}
+.FaqList{
+  display:flex;
+  flex-direction:column;
+}
+.FaqItem{
+  border-top:1px solid var(--Line);
+}
+.FaqItem:last-child{
+  border-bottom:1px solid var(--Line);
+}
+.FaqQ{
+  appearance:none;
+  background:none;
+  border:0;
+  color:inherit;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  justify-content:space-between;
+  padding:1.15rem 0;
+  width:100%;
+  text-align:left;
+  font:inherit;
+  font-size:1em;
+  font-weight:500;
+  color:var(--T1);
+  transition:color .15s ease;
+}
+.FaqQ:hover{
+  color:#d4d4dc;
+}
+.FaqChev{
+  flex-shrink:0;
+  font-size:0.8em;
+  color:var(--T3);
+  transition:transform .25s cubic-bezier(0.4, 0, 0.2, 1), color .15s ease;
+}
+.FaqQ[aria-expanded="true"] .FaqChev{
+  transform:rotate(180deg);
+  color:var(--T1);
+}
+.FaqA{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.FaqA[data-open="true"]{
+  grid-template-rows:1fr;
+}
+.FaqAIn{
+  overflow:hidden;
+}
+.FaqATxt{
+  color:var(--T2);
+  font-size:1em;
+  line-height:1.7;
+  padding:0 0 1.25rem;
+  max-width:36rem;
+}
+.FaqATxt a{
+  color:var(--T1);
+  border-bottom:1px solid var(--LineH);
+  padding-bottom:1px;
+  transition:border-color .15s ease;
+  word-break:break-word;
+}
+.FaqATxt a:hover{
+  border-color:var(--T1);
+}
+
+.Foot{
+  margin-top:8vh;
+  padding-top:3vh;
+  border-top:1px solid var(--Line);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1em;
+  font-size:0.85em;
+  color:var(--T3);
+}
+.FootNav{
+  display:flex;
+  align-items:center;
+  gap:1.5em;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.FootNav a{
+  color:var(--T2);
+  transition:color .15s ease;
+}
+.FootNav a:hover{
+  color:var(--T1);
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.is-loaded .HeroLine path{
+    animation:none;
+    stroke-dashoffset:0;
+    opacity:1;
+  }
+  .FaqA,.FaqChev,.HeroLink i{transition:none}
+  .LoaderSpin{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="Loader" id="Loader" aria-hidden="true">
+  <div class="LoaderSpin"></div>
+</div>
+
+<div class="Page">
+  <div class="Cont">
+
+    <section class="Hero">
+      <img
+        class="HeroLogo"
+        id="HeroLogo"
+        src="https://rocmn.pythonanywhere.com/image/logo.png"
+        alt="Rocmn Cheats"
+      >
+      <h1 class="HeroTitle">
+        Rocmn <span class="HeroWord">Cheats<svg class="HeroLine" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 9 C 40 6, 80 11, 120 8 S 180 5, 196 8"/></svg></span>
+      </h1>
+      <p class="HeroLead">
+        Een verzameling tools om je schooljaar net wat makkelijker te maken.
+        Snel, simpel en zonder gedoe.
+      </p>
+
+      <div class="HeroLinks">
+        <a class="HeroLink" href="/tools/">
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          Bekijk tools
+        </a>
+        <a class="HeroLink" href="/contact/">
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          Neem contact op
+        </a>
+      </div>
+    </section>
+
+    <div class="Div"></div>
+
+    <section class="Faq">
+      <div class="FaqHead">
+        <h2 class="FaqTitle">Veelgestelde vragen</h2>
+      </div>
+
+      <div class="FaqList">
+
+        <div class="FaqItem">
+          <button class="FaqQ" type="button" aria-expanded="false">
+            <span>Wat is Rocmn Cheats precies?</span>
+            <i class="fa-solid fa-chevron-down FaqChev" aria-hidden="true"></i>
+          </button>
+          <div class="FaqA" data-open="false">
+            <div class="FaqAIn">
+              <p class="FaqATxt">
+                Het is een collectie van programma's en extensions die ik heb
+                gemaakt om dingen wat makkelijker te maken voor mezelf.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="FaqItem">
+          <button class="FaqQ" type="button" aria-expanded="false">
+            <span>Waarom heb ik dit gemaakt?</span>
+            <i class="fa-solid fa-chevron-down FaqChev" aria-hidden="true"></i>
+          </button>
+          <div class="FaqA" data-open="false">
+            <div class="FaqAIn">
+              <p class="FaqATxt">
+                Natuurlijk voor mezelf, maar ook gewoon omdat ik me kapot verveelde :)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="FaqItem">
+          <button class="FaqQ" type="button" aria-expanded="false">
+            <span>Is het gratis om te gebruiken?</span>
+            <i class="fa-solid fa-chevron-down FaqChev" aria-hidden="true"></i>
+          </button>
+          <div class="FaqA" data-open="false">
+            <div class="FaqAIn">
+              <p class="FaqATxt">
+                Ja, ik vraag hier geen geld voor.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="FaqItem">
+          <button class="FaqQ" type="button" aria-expanded="false">
+            <span>Werkt het op mijn telefoon?</span>
+            <i class="fa-solid fa-chevron-down FaqChev" aria-hidden="true"></i>
+          </button>
+          <div class="FaqA" data-open="false">
+            <div class="FaqAIn">
+              <p class="FaqATxt">
+                Nee, dit werkt alleen op Windows 10/11 64-bit.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="FaqItem">
+          <button class="FaqQ" type="button" aria-expanded="false">
+            <span>Waarom worden de .exe bestanden gemarkeerd door Windows antivirus?</span>
+            <i class="fa-solid fa-chevron-down FaqChev" aria-hidden="true"></i>
+          </button>
+          <div class="FaqA" data-open="false">
+            <div class="FaqAIn">
+              <p class="FaqATxt">
+                Omdat de programma's zijn gecompileerd met Nuitka. Dit is een
+                bekend probleem, als je het niet gelooft kun je het hier
+                nalezen:
+                <a href="https://github.com/Nuitka/Nuitka/issues/2685" target="_blank" rel="noopener noreferrer">github.com/Nuitka/Nuitka/issues/2685</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="FaqItem">
+          <button class="FaqQ" type="button" aria-expanded="false">
+            <span>Kan ik een tool aanvragen?</span>
+            <i class="fa-solid fa-chevron-down FaqChev" aria-hidden="true"></i>
+          </button>
+          <div class="FaqA" data-open="false">
+            <div class="FaqAIn">
+              <p class="FaqATxt">
+                Ja, zeker! Dat kan <a href="/contact/">hier</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="Foot">
+      <nav class="FootNav" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/tools/">Tools</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <p>Rocmn Cheats, credits naar SamK</p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+"use strict";
+
+(() => {
+  const Ld = document.getElementById("Loader");
+  const Imgs = Array.from(document.querySelectorAll("img"));
+
+  const Wait = (I) => new Promise((Res) => {
+    if (I.complete && I.naturalWidth > 0) return Res();
+    I.addEventListener("load", Res, { once: true });
+    I.addEventListener("error", Res, { once: true });
+  });
+
+  Promise.all(Imgs.map(Wait)).then(() => {
+    setTimeout(() => {
+      Ld.classList.add("is-hidden");
+      document.body.classList.add("is-loaded");
+      setTimeout(() => Ld.remove(), 600);
+    }, 300);
+  });
+})();
+
+(() => {
+  document.querySelectorAll(".FaqQ").forEach((Btn) => {
+    Btn.addEventListener("click", () => {
+      const Open = Btn.getAttribute("aria-expanded") === "true";
+      const Ans = Btn.nextElementSibling;
+
+      Btn.setAttribute("aria-expanded", String(!Open));
+      Ans.setAttribute("data-open", String(!Open));
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

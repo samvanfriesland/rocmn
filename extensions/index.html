@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extensies installeren | Rocmn Cheats</title>
+<link rel="icon" href="https://rocmn.pythonanywhere.com/image/logo.png">
+
+<meta name="theme-color" content="#17171a">
+<meta property="og:title" content="Extensies installeren | Rocmn Cheats">
+<meta property="og:description" content="Hoe je een extensie van Rocmn Cheats installeert in je browser.">
+<meta property="og:image" content="https://rocmn.pythonanywhere.com/image/logo.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --Bg:#17171a;
+  --Card:#1e1e22;
+  --Line:#2e2e34;
+  --LineH:#4a4a52;
+  --T1:#ffffff;
+  --T2:#b4b4bc;
+  --T3:#7a7a83;
+  --Acc:#ffffff;
+  --R:8px;
+  --Rs:6px;
+  --Ff:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --PadX:4vw;
+  --PadY:5vh;
+  --PageMax:92vw;
+  --Cont:56vw;
+  --Base:clamp(15px, 1.05vw, 19px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+  font-size:var(--Base);
+}
+html::-webkit-scrollbar{display:none;width:0;height:0}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--T1);
+  font-family:var(--Ff);
+  font-size:1rem;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-color:var(--Bg);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(circle at 85% 90%, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(rgba(255,255,255,0.11) 1.2px, transparent 1.4px),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    1.5rem 1.5rem,
+    100% 100%;
+  background-attachment:fixed, fixed, fixed, fixed;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.02em;line-height:1.2}
+p{margin:0}
+p + p{margin-top:0.85rem}
+:focus-visible{outline:2px solid var(--Acc);outline-offset:3px;border-radius:var(--Rs)}
+
+.Page{
+  max-width:var(--PageMax);
+  margin:0 auto;
+  padding:var(--PadY) var(--PadX);
+}
+.Cont{
+  max-width:var(--Cont);
+  margin:0 auto;
+}
+
+.Back{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  color:var(--T2);
+  font-size:0.9em;
+  transition:color .15s ease;
+}
+.Back:hover{color:var(--T1)}
+.Back i{font-size:0.75em}
+
+.Head{
+  margin-top:5vh;
+  margin-bottom:6vh;
+}
+.HeadTitle{
+  font-size:clamp(2rem,3.6vw,3.5rem);
+  font-weight:700;
+  letter-spacing:-0.03em;
+  background:linear-gradient(180deg,#ffffff 0%,#c8c8d0 130%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:0.6em;
+}
+.HeadLead{
+  color:var(--T2);
+  font-size:1.05em;
+  line-height:1.6;
+  max-width:34rem;
+}
+
+.Note{
+  display:flex;
+  align-items:flex-start;
+  gap:0.75em;
+  padding:1em 1.15em;
+  border:1px solid var(--Line);
+  border-left:2px solid rgba(255,255,255,0.5);
+  border-radius:var(--R);
+  background:rgba(255,255,255,0.02);
+  color:var(--T2);
+  font-size:0.95em;
+  line-height:1.65;
+  margin-bottom:8vh;
+}
+.Note i{
+  color:var(--T3);
+  font-size:0.9em;
+  margin-top:0.2em;
+  flex-shrink:0;
+}
+.Note strong{
+  color:var(--T1);
+  font-weight:500;
+}
+
+.Steps{
+  display:flex;
+  flex-direction:column;
+  gap:6vh;
+}
+.Step{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:1.5em;
+  align-items:flex-start;
+}
+@media (min-width:900px){
+  .Step{
+    grid-template-columns:2.5em 1fr;
+    gap:2em;
+  }
+}
+.StepNum{
+  color:var(--T3);
+  font-weight:600;
+  font-size:1.15em;
+  font-variant-numeric:tabular-nums;
+  line-height:1.2;
+  flex-shrink:0;
+  padding-top:0.05em;
+}
+.StepBody{
+  min-width:0;
+}
+.StepTitle{
+  font-size:1.15em;
+  font-weight:600;
+  letter-spacing:-0.02em;
+  color:var(--T1);
+  margin-bottom:0.5em;
+}
+.StepTxt{
+  color:var(--T2);
+  font-size:1em;
+  line-height:1.7;
+  max-width:38rem;
+}
+.StepTxt + .StepTxt{
+  margin-top:0.85em;
+}
+
+.Chip{
+  display:inline-block;
+  padding:0.1em 0.5em;
+  border:1px solid var(--Line);
+  border-radius:var(--Rs);
+  background:var(--Card);
+  color:var(--T1);
+  font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:0.9em;
+  line-height:1.5;
+  word-break:break-all;
+}
+
+.Tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5em;
+  margin-top:1em;
+}
+.Tag{
+  display:inline-flex;
+  align-items:center;
+  gap:0.35em;
+  padding:0.25em 0.65em;
+  border:1px solid var(--Line);
+  border-radius:999px;
+  color:var(--T2);
+  font-size:0.8em;
+  font-weight:500;
+}
+.Tag i{font-size:0.9em}
+
+.Trb{
+  margin-top:10vh;
+}
+.TrbTitle{
+  font-size:1.15em;
+  font-weight:600;
+  color:var(--T1);
+  margin-bottom:1.25rem;
+}
+.TrbList{
+  display:flex;
+  flex-direction:column;
+}
+.TrbItem{
+  border-top:1px solid var(--Line);
+}
+.TrbItem:last-child{
+  border-bottom:1px solid var(--Line);
+}
+.TrbQ{
+  appearance:none;
+  background:none;
+  border:0;
+  color:inherit;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  justify-content:space-between;
+  padding:1.15rem 0;
+  width:100%;
+  text-align:left;
+  font:inherit;
+  font-size:1em;
+  font-weight:500;
+  color:var(--T1);
+  transition:color .15s ease;
+}
+.TrbQ:hover{color:#d4d4dc}
+.TrbChev{
+  flex-shrink:0;
+  font-size:0.8em;
+  color:var(--T3);
+  transition:transform .25s cubic-bezier(0.4, 0, 0.2, 1), color .15s ease;
+}
+.TrbQ[aria-expanded="true"] .TrbChev{
+  transform:rotate(180deg);
+  color:var(--T1);
+}
+.TrbA{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.TrbA[data-open="true"]{
+  grid-template-rows:1fr;
+}
+.TrbAIn{
+  overflow:hidden;
+}
+.TrbATxt{
+  color:var(--T2);
+  font-size:1em;
+  line-height:1.7;
+  padding:0 0 1.25rem;
+  max-width:38rem;
+}
+
+.Foot{
+  margin-top:10vh;
+  padding-top:4vh;
+  border-top:1px solid var(--Line);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1em;
+  font-size:0.85em;
+  color:var(--T3);
+}
+.FootNav{
+  display:flex;
+  align-items:center;
+  gap:1.5em;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.FootNav a{
+  color:var(--T2);
+  transition:color .15s ease;
+}
+.FootNav a:hover{
+  color:var(--T1);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .TrbA,.TrbChev{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="Page">
+  <div class="Cont">
+
+    <a class="Back" href="/">
+      <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      Terug naar home
+    </a>
+
+    <header class="Head">
+      <h1 class="HeadTitle">Extensies installeren</h1>
+      <p class="HeadLead">
+        Een korte uitleg over hoe je een extensie die je van deze site
+        hebt gedownload handmatig toevoegt aan je browser.
+      </p>
+    </header>
+
+    <div class="Note">
+      <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+      <p>
+        <strong>Let op:</strong> je browser ondersteunt meestal geen losse
+        extensie bestanden meer, dus we doen het via de ontwikkelaarsmodus.
+        Dit klinkt technischer dan het is.
+      </p>
+    </div>
+
+    <section class="Steps">
+
+      <article class="Step">
+        <span class="StepNum">1</span>
+        <div class="StepBody">
+          <h2 class="StepTitle">Open het extensie menu</h2>
+          <p class="StepTxt">
+            Klik op het puzzelstukje in de rechterbovenhoek van je browser.
+            Dit is het icoon voor alle extensies.
+          </p>
+          <p class="StepTxt">
+            Kies daarna <span class="Chip">Extensies beheren</span> in het
+            menu dat tevoorschijn komt.
+          </p>
+        </div>
+      </article>
+
+      <article class="Step">
+        <span class="StepNum">2</span>
+        <div class="StepBody">
+          <h2 class="StepTitle">Schakel de ontwikkelaarsmodus in</h2>
+          <p class="StepTxt">
+            Rechtsboven in de extensiepagina staat een schakelaar met de
+            naam <span class="Chip">Ontwikkelaarsmodus</span>.
+            Zet deze aan.
+          </p>
+          <p class="StepTxt">
+            Er verschijnen nu een paar extra knoppen in beeld, waaronder
+            eentje om een extensie te laden.
+          </p>
+        </div>
+      </article>
+
+      <article class="Step">
+        <span class="StepNum">3</span>
+        <div class="StepBody">
+          <h2 class="StepTitle">Kies voor "Uitgepakte extensie laden"</h2>
+          <p class="StepTxt">
+            Klik op <span class="Chip">Uitgepakte extensie laden</span>
+            (soms heet dit <span class="Chip">Load unpacked</span>).
+            Er opent een bestandsvenster.
+          </p>
+        </div>
+      </article>
+
+      <article class="Step">
+        <span class="StepNum">4</span>
+        <div class="StepBody">
+          <h2 class="StepTitle">Pak het zip bestand uit</h2>
+          <p class="StepTxt">
+            Zoek het zip bestand op dat je hebt gedownload van deze site
+            en pak het uit. Op Windows doe je dat met een rechtermuisklik
+            op het bestand, en dan <span class="Chip">Alles uitpakken</span>.
+          </p>
+          <p class="StepTxt">
+            Je krijgt nu een gewone map met daarin de inhoud van de extensie.
+          </p>
+        </div>
+      </article>
+
+      <article class="Step">
+        <span class="StepNum">5</span>
+        <div class="StepBody">
+          <h2 class="StepTitle">Selecteer de uitgepakte map</h2>
+          <p class="StepTxt">
+            Ga in het bestandsvenster naar de map die je net hebt uitgepakt
+            en selecteer die map. Belangrijk: selecteer de map zelf, niet
+            een bestand dat erin zit.
+          </p>
+          <p class="StepTxt">
+            Klik op <span class="Chip">Map selecteren</span> en de extensie
+            wordt toegevoegd aan je browser.
+          </p>
+          <div class="Tags">
+            <span class="Tag">
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+              Klaar
+            </span>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="Trb">
+      <h2 class="TrbTitle">Gaat er iets mis?</h2>
+
+      <div class="TrbList">
+
+        <div class="TrbItem">
+          <button class="TrbQ" type="button" aria-expanded="false">
+            <span>Ik zie de knop "Uitgepakte extensie laden" niet</span>
+            <i class="fa-solid fa-chevron-down TrbChev" aria-hidden="true"></i>
+          </button>
+          <div class="TrbA" data-open="false">
+            <div class="TrbAIn">
+              <p class="TrbATxt">
+                Dan staat de ontwikkelaarsmodus nog niet aan. Ga terug naar
+                stap 2 en zet de schakelaar rechtsboven op de pagina aan.
+                Daarna verschijnt de knop vanzelf.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="TrbItem">
+          <button class="TrbQ" type="button" aria-expanded="false">
+            <span>Mijn browser zegt dat de extensie ongeldig is</span>
+            <i class="fa-solid fa-chevron-down TrbChev" aria-hidden="true"></i>
+          </button>
+          <div class="TrbA" data-open="false">
+            <div class="TrbAIn">
+              <p class="TrbATxt">
+                Dit gebeurt meestal als je per ongeluk een bestand hebt
+                geselecteerd in plaats van de map zelf. Probeer het opnieuw
+                en let goed op dat je de hele map selecteert.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="TrbItem">
+          <button class="TrbQ" type="button" aria-expanded="false">
+            <span>De extensie verdwijnt elke keer als ik mijn browser sluit</span>
+            <i class="fa-solid fa-chevron-down TrbChev" aria-hidden="true"></i>
+          </button>
+          <div class="TrbA" data-open="false">
+            <div class="TrbAIn">
+              <p class="TrbATxt">
+                Dit hoort bij het laden van een uitgepakte extensie. Zorg
+                dat je de uitgepakte map niet verplaatst of verwijdert,
+                anders raakt de extensie losgekoppeld van de map.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="Foot">
+      <nav class="FootNav" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/tools/">Tools</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <p>Rocmn Cheats, credits naar SamK</p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+"use strict";
+
+(() => {
+  document.querySelectorAll(".TrbQ").forEach((Btn) => {
+    Btn.addEventListener("click", () => {
+      const Open = Btn.getAttribute("aria-expanded") === "true";
+      const Ans = Btn.nextElementSibling;
+
+      Btn.setAttribute("aria-expanded", String(!Open));
+      Ans.setAttribute("data-open", String(!Open));
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

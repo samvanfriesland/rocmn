@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools | Rocmn Cheats</title>
+<link rel="icon" href="https://rocmn.pythonanywhere.com/image/logo.png">
+
+<meta name="theme-color" content="#17171a">
+<meta property="og:title" content="Tools | Rocmn Cheats">
+<meta property="og:description" content="Beschikbare tools van Rocmn Cheats.">
+<meta property="og:image" content="https://rocmn.pythonanywhere.com/image/logo.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --Bg:#17171a;
+  --Card:#1e1e22;
+  --Line:#2e2e34;
+  --LineH:#4a4a52;
+  --T1:#ffffff;
+  --T2:#b4b4bc;
+  --T3:#7a7a83;
+  --Acc:#ffffff;
+  --R:8px;
+  --Rs:6px;
+  --Ff:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --PadX:4vw;
+  --PadY:5vh;
+  --ToolGap:8vh;
+  --PageMax:92vw;
+  --Base:clamp(15px, 1.05vw, 19px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+  font-size:var(--Base);
+}
+html::-webkit-scrollbar{display:none;width:0;height:0}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--T1);
+  font-family:var(--Ff);
+  font-size:1rem;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-color:var(--Bg);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(circle at 85% 90%, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(rgba(255,255,255,0.11) 1.2px, transparent 1.4px),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    1.5rem 1.5rem,
+    100% 100%;
+  background-attachment:fixed, fixed, fixed, fixed;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.02em;line-height:1.2}
+p{margin:0}
+p + p{margin-top:0.85rem}
+:focus-visible{outline:2px solid var(--Acc);outline-offset:3px;border-radius:var(--Rs)}
+
+.Loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--Bg);
+  opacity:1;
+  transition:opacity .5s ease;
+}
+.Loader.is-hidden{
+  opacity:0;
+  pointer-events:none;
+}
+.LoaderSpin{
+  width:2rem;
+  height:2rem;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.12);
+  border-top-color:#ffffff;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.Page{
+  max-width:var(--PageMax);
+  margin:0 auto;
+  padding:var(--PadY) var(--PadX);
+  opacity:0;
+  transition:opacity .6s ease;
+}
+body.is-loaded .Page{
+  opacity:1;
+}
+
+.Side{
+  position:fixed;
+  top:50%;
+  right:2vw;
+  transform:translateY(-50%);
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1em;
+  padding:0;
+  margin:0;
+  list-style:none;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .6s ease;
+}
+body.is-loaded .Side{
+  opacity:1;
+}
+.SideItem{
+  pointer-events:auto;
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+.SideDot{
+  appearance:none;
+  border:0;
+  padding:0;
+  margin:0;
+  background:rgba(255,255,255,0.24);
+  width:0.7em;
+  height:0.7em;
+  border-radius:999px;
+  cursor:pointer;
+  transition:
+    height .28s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color .28s ease,
+    transform .28s ease;
+  display:block;
+}
+.SideDot:hover{
+  background:rgba(255,255,255,0.55);
+}
+.SideDot.is-active{
+  background:#ffffff;
+  height:2.4em;
+}
+.SideLbl{
+  position:absolute;
+  right:calc(100% + 0.9em);
+  top:50%;
+  transform:translateY(-50%) translateX(0.3em);
+  white-space:nowrap;
+  font-size:0.85rem;
+  font-weight:500;
+  color:var(--T1);
+  background:rgba(20,20,22,0.92);
+  border:1px solid var(--Line);
+  padding:0.35em 0.75em;
+  border-radius:var(--Rs);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+.SideItem:hover .SideLbl{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+@media (max-width:900px){
+  .Side{display:none}
+}
+
+.Back{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  color:var(--T2);
+  font-size:0.875em;
+  transition:color .15s ease;
+}
+.Back:hover{color:var(--T1)}
+.Back i{font-size:0.75em}
+
+.Head{
+  margin-top:3vh;
+  margin-bottom:8vh;
+  max-width:40em;
+}
+.HeadTitle{
+  font-size:clamp(2rem,3.4vw,3rem);
+  font-weight:700;
+  letter-spacing:-0.03em;
+  background:linear-gradient(180deg,#ffffff 0%,#c8c8d0 130%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:0.6em;
+}
+.HeadLead{
+  color:var(--T2);
+  font-size:0.95em;
+  line-height:1.6;
+}
+
+.Tool{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:5vh;
+  align-items:center;
+  padding-block:var(--ToolGap);
+  scroll-margin-top:8vh;
+}
+.Tool:first-of-type{padding-top:0}
+.Tool:last-of-type{padding-bottom:0}
+
+.Tool + .Tool::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.14) 15%,
+    rgba(255,255,255,0.28) 50%,
+    rgba(255,255,255,0.14) 85%,
+    transparent 100%
+  );
+}
+.Tool + .Tool::after{
+  content:"";
+  position:absolute;
+  top:-0.15em;
+  left:50%;
+  width:0.4em;
+  height:0.4em;
+  transform:translateX(-50%) rotate(45deg);
+  background:var(--Bg);
+  border:1px solid rgba(255,255,255,0.28);
+}
+@media (min-width:900px){
+  .Tool{
+    grid-template-columns:62fr 38fr;
+    gap:4vw;
+  }
+  .ToolRev{
+    grid-template-columns:38fr 62fr;
+  }
+  .ToolRev .ToolMedia{order:2}
+  .ToolRev .ToolInfo{order:1}
+}
+.ToolMedia{min-width:0}
+.ToolInfo{
+  display:flex;
+  flex-direction:column;
+  gap:1em;
+  min-width:0;
+}
+.ToolTitle{
+  font-size:clamp(1.4rem,2.2vw,2.1rem);
+  font-weight:600;
+  letter-spacing:-0.025em;
+  color:var(--T1);
+}
+.ToolDesc{
+  color:var(--T2);
+  font-size:1em;
+  line-height:1.7;
+}
+
+.ToolActs{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:1.5em;
+  margin-top:0.5em;
+}
+.ToolAct{
+  appearance:none;
+  border:0;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  color:var(--T1);
+  font-family:inherit;
+  font-size:1em;
+  font-weight:500;
+  display:inline-flex;
+  align-items:center;
+  gap:0.55em;
+  border-bottom:1px solid var(--LineH);
+  padding-bottom:0.15em;
+  transition:color .15s ease, border-color .15s ease;
+  text-align:left;
+}
+.ToolAct:hover{
+  color:var(--T1);
+  border-color:var(--T1);
+}
+.ToolAct i{
+  font-size:0.85em;
+  color:var(--T3);
+  transition:color .15s ease;
+}
+.ToolAct:hover i{
+  color:var(--T1);
+}
+
+.Car{
+  position:relative;
+  width:100%;
+}
+.CarView{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/10;
+  overflow:hidden;
+}
+.CarTrack{
+  display:flex;
+  height:100%;
+  width:100%;
+  transition:transform .45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.CarSlide{
+  flex:0 0 100%;
+  height:100%;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.CarSlide img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.CarNav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,0.55);
+  cursor:pointer;
+  padding:1vw;
+  font-size:clamp(1.2rem,1.6vw,1.8rem);
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:color .15s ease, opacity .15s ease;
+  z-index:2;
+}
+.CarNav:hover{color:#ffffff}
+.CarNav:disabled{opacity:0.25;cursor:default}
+.CarNavPrev{left:0.5vw}
+.CarNavNext{right:0.5vw}
+
+.CarDots{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-2em;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.7em;
+  pointer-events:none;
+}
+.CarDot{
+  width:0.65em;
+  height:0.65em;
+  border-radius:50%;
+  background:rgba(255,255,255,0.28);
+  border:0;
+  padding:0;
+  cursor:pointer;
+  pointer-events:auto;
+  transition:background-color .2s ease, transform .2s ease;
+}
+.CarDot:hover{
+  background:rgba(255,255,255,0.55);
+}
+.CarDot.is-active{
+  background:var(--T1);
+  transform:scale(1.25);
+}
+
+.Mod{
+  position:fixed;
+  inset:0;
+  z-index:9000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:var(--PadX);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s ease;
+}
+.Mod.is-open{
+  opacity:1;
+  pointer-events:auto;
+}
+.ModBg{
+  position:absolute;
+  inset:0;
+  background:rgba(8,8,10,0.62);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+.ModPan{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:min(34rem, 100%);
+  background:var(--Card);
+  border:1px solid var(--Line);
+  border-radius:var(--R);
+  padding:1.5em 1.6em 1.35em;
+  transform:translateY(0.6em);
+  transition:transform .22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.Mod.is-open .ModPan{
+  transform:translateY(0);
+}
+.ModHead{
+  display:flex;
+  align-items:flex-start;
+  gap:1em;
+  margin-bottom:1em;
+}
+.ModTitle{
+  font-size:1.15em;
+  font-weight:600;
+  letter-spacing:-0.02em;
+  color:var(--T1);
+  flex:1 1 auto;
+}
+.ModClose{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:var(--T3);
+  cursor:pointer;
+  padding:0.15em 0.35em;
+  margin:-0.15em -0.35em 0 0;
+  font-size:1em;
+  line-height:1;
+  border-radius:var(--Rs);
+  transition:color .15s ease;
+}
+.ModClose:hover{color:var(--T1)}
+.ModBody{
+  color:var(--T2);
+  font-size:1em;
+  line-height:1.7;
+}
+.ModBody p + p{margin-top:0.75em}
+.ModBody code,
+.ModBody .Chip{
+  display:inline-block;
+  padding:0.1em 0.45em;
+  border:1px solid var(--Line);
+  border-radius:var(--Rs);
+  background:var(--Bg);
+  color:var(--T1);
+  font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:0.9em;
+  line-height:1.5;
+  word-break:break-all;
+}
+.ModActs{
+  display:flex;
+  justify-content:flex-end;
+  gap:0.6em;
+  margin-top:1.5em;
+}
+.ModBtn{
+  appearance:none;
+  border:1px solid var(--Line);
+  background:transparent;
+  color:var(--T1);
+  font:inherit;
+  font-size:0.95em;
+  font-weight:500;
+  padding:0.55em 1.1em;
+  border-radius:var(--Rs);
+  cursor:pointer;
+  transition:background-color .15s ease, border-color .15s ease;
+}
+.ModBtn:hover{
+  background:rgba(255,255,255,0.05);
+  border-color:var(--LineH);
+}
+.ModBtnPri{
+  background:var(--Acc);
+  border-color:var(--Acc);
+  color:#17171a;
+}
+.ModBtnPri:hover{
+  background:#e6e6ea;
+  border-color:#e6e6ea;
+}
+
+.Foot{
+  margin-top:10vh;
+  padding-top:4vh;
+  border-top:1px solid var(--Line);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1em;
+  font-size:0.85em;
+  color:var(--T3);
+}
+.FootNav{
+  display:flex;
+  align-items:center;
+  gap:1.5em;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.FootNav a{
+  color:var(--T2);
+  transition:color .15s ease;
+}
+.FootNav a:hover{
+  color:var(--T1);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .LoaderSpin{animation:none}
+  .Mod,.ModPan{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="Loader" id="Loader" aria-hidden="true">
+  <div class="LoaderSpin"></div>
+</div>
+
+<nav class="Side" id="Side" aria-label="Secties">
+  <div class="SideItem">
+    <span class="SideLbl">PT Bridge</span>
+    <button class="SideDot" type="button" data-target="tool-1" aria-label="Ga naar PT Bridge"></button>
+  </div>
+  <div class="SideItem">
+    <span class="SideLbl">SamK Tutor</span>
+    <button class="SideDot" type="button" data-target="tool-2" aria-label="Ga naar SamK Tutor"></button>
+  </div>
+  <div class="SideItem">
+    <span class="SideLbl">CodeQuest Solver</span>
+    <button class="SideDot" type="button" data-target="tool-3" aria-label="Ga naar CodeQuest Solver"></button>
+  </div>
+</nav>
+
+<div class="Page">
+
+  <a class="Back" href="/">
+    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+    Terug naar home
+  </a>
+
+  <header class="Head">
+    <h1 class="HeadTitle">Tools</h1>
+    <p class="HeadLead">
+      Alle beschikbare tools van Rocmn Cheats. Nieuwe tools worden hier
+      toegevoegd zodra ze klaar zijn.
+    </p>
+  </header>
+
+  <article class="Tool" id="tool-1">
+    <div class="ToolMedia">
+      <div class="Car" data-carousel>
+        <div class="CarView">
+          <div class="CarTrack">
+            <div class="CarSlide">
+              <img src="https://rocmn.pythonanywhere.com/image/PTBridge/home.png" alt="PT Bridge home">
+            </div>
+            <div class="CarSlide">
+              <img src="https://rocmn.pythonanywhere.com/image/PTBridge/pt.png" alt="PT Bridge in Packet Tracer">
+            </div>
+          </div>
+
+          <button class="CarNav CarNavPrev" type="button" aria-label="Vorige afbeelding">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="CarNav CarNavNext" type="button" aria-label="Volgende afbeelding">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="CarDots">
+          <button class="CarDot is-active" type="button" data-index="0" aria-label="Afbeelding 1"></button>
+          <button class="CarDot" type="button" data-index="1" aria-label="Afbeelding 2"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ToolInfo">
+      <h2 class="ToolTitle">PT Bridge</h2>
+      <p class="ToolDesc">
+        PT Bridge is een programma dat direct met de Packet Tracer
+        applicatie communiceert. Je kopieert de opdracht uit het
+        programma, plakt die samen met de Packet Tracer opdracht in een
+        AI chat, en plaatst de JSON response die je terugkrijgt weer in
+        PT Bridge.
+      </p>
+      <p class="ToolDesc">
+        Het programma plaatst en stelt daarmee automatisch alles in. Het
+        geeft je ook instructies voor dingen die je zelf moet controleren
+        of doen, en het heeft een ingebouwde ping test waarmee je
+        meteen kunt checken of je netwerk werkt.
+      </p>
+
+      <div class="ToolActs">
+        <button class="ToolAct"
+                type="button"
+                data-dl="SamKPTBridge.zip"
+                data-mod="1"
+                data-mod-t="PT Bridge installeren"
+                data-mod-tpl="ptbridge-modal">
+          <i class="fa-solid fa-download" aria-hidden="true"></i>
+          Download PT Bridge
+        </button>
+      </div>
+
+      <template id="ptbridge-modal">
+        <p>
+          Pak het zip bestand uit en volg de stappen in de meegeleverde
+          handleiding.
+        </p>
+        <p>
+          Krijg je de melding dat de toegang tot
+          <span class="Chip">C:\Program Files\Cisco Packet Tracer 9.0.1\extensions</span>
+          geweigerd wordt? Ga dan naar de map
+          <span class="Chip">input/resources</span> in de uitgepakte
+          bestanden, en kopieer de map <span class="Chip">V5.2</span>
+          handmatig naar de <span class="Chip">extensions</span> map van
+          Packet Tracer.
+        </p>
+      </template>
+    </div>
+  </article>
+
+  <article class="Tool ToolRev" id="tool-2">
+    <div class="ToolMedia">
+      <div class="Car" data-carousel>
+        <div class="CarView">
+          <div class="CarTrack">
+            <div class="CarSlide">
+              <img src="https://rocmn.pythonanywhere.com/image/SamKTutor/full.png" alt="SamK Tutor volledige weergave">
+            </div>
+            <div class="CarSlide">
+              <img src="https://rocmn.pythonanywhere.com/image/SamKTutor/smaller.png" alt="SamK Tutor compacte weergave">
+            </div>
+          </div>
+
+          <button class="CarNav CarNavPrev" type="button" aria-label="Vorige afbeelding">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="CarNav CarNavNext" type="button" aria-label="Volgende afbeelding">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="CarDots">
+          <button class="CarDot is-active" type="button" data-index="0" aria-label="Afbeelding 1"></button>
+          <button class="CarDot" type="button" data-index="1" aria-label="Afbeelding 2"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ToolInfo">
+      <h2 class="ToolTitle">SamK Tutor</h2>
+      <p class="ToolDesc">
+        SamK Tutor is een browserextensie die je opdrachten voor je
+        oplost. Je maakt een screenshot van je hele scherm of van een
+        gedeelte ervan, stuurt die naar onze backend en de AI geeft je
+        meteen het antwoord.
+      </p>
+      <p class="ToolDesc">
+        De extensie heeft ook een experimentele functie die het
+        antwoord automatisch invult en de juiste optie selecteert, zodat
+        je er zelf niets meer aan hoeft te doen.
+      </p>
+
+      <div class="ToolActs">
+        <button class="ToolAct"
+                type="button"
+                data-dl="SamKTutor.zip"
+                data-mod="1"
+                data-mod-t="SamK Tutor installeren"
+                data-mod-tpl="samktutor-modal">
+          <i class="fa-solid fa-download" aria-hidden="true"></i>
+          Download SamK Tutor
+        </button>
+
+        <a class="ToolAct"
+           href="/extensions/"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          Installatie uitleg
+        </a>
+      </div>
+
+      <template id="samktutor-modal">
+        <p>
+          Pak het zip bestand uit en volg de stappen op de
+          installatiepagina om de extensie toe te voegen aan je browser.
+        </p>
+        <p>
+          Open de uitleg via de knop "Installatie uitleg" naast de
+          download knop, of ga direct naar
+          <span class="Chip">/extensions/</span>.
+        </p>
+      </template>
+    </div>
+  </article>
+
+  <article class="Tool" id="tool-3">
+    <div class="ToolMedia">
+      <div class="Car" data-carousel>
+        <div class="CarView">
+          <div class="CarTrack">
+            <div class="CarSlide">
+              <img src="https://rocmn.pythonanywhere.com/image/CodeQuestSolver/full.png" alt="CodeQuest Solver volledige weergave">
+            </div>
+            <div class="CarSlide">
+              <img src="https://rocmn.pythonanywhere.com/image/CodeQuestSolver/proof.png" alt="CodeQuest Solver bewijs van werking">
+            </div>
+          </div>
+
+          <button class="CarNav CarNavPrev" type="button" aria-label="Vorige afbeelding">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="CarNav CarNavNext" type="button" aria-label="Volgende afbeelding">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="CarDots">
+          <button class="CarDot is-active" type="button" data-index="0" aria-label="Afbeelding 1"></button>
+          <button class="CarDot" type="button" data-index="1" aria-label="Afbeelding 2"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ToolInfo">
+      <h2 class="ToolTitle">CodeQuest Solver</h2>
+      <p class="ToolDesc">
+        CodeQuest Solver is een browserextensie voor het vak Projecten
+        in periode 1. Hij is gemaakt voor
+        <span class="Chip">codequest.stichtingpraktijkleren.nl</span> en
+        rondt alle 40 levels automatisch voor je af.
+      </p>
+      <p class="ToolDesc">
+        De opdrachten daar kosten normaal veel tijd, dus deze extensie
+        neemt het hele proces over zodat je er zelf niets meer aan hoeft
+        te doen. Gemaakt uit pure irritatie omdat het zo lang duurde.
+      </p>
+
+      <div class="ToolActs">
+        <button class="ToolAct"
+                type="button"
+                data-dl="CodeQuestSolver.zip"
+                data-mod="1"
+                data-mod-t="CodeQuest Solver installeren"
+                data-mod-tpl="codequest-modal">
+          <i class="fa-solid fa-download" aria-hidden="true"></i>
+          Download CodeQuest Solver
+        </button>
+
+        <a class="ToolAct"
+           href="/extensions/"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          Installatie uitleg
+        </a>
+      </div>
+
+      <template id="codequest-modal">
+        <p>
+          Pak het zip bestand uit en volg de stappen op de
+          installatiepagina om de extensie toe te voegen aan je browser.
+        </p>
+        <p>
+          Open de uitleg via de knop "Installatie uitleg" naast de
+          download knop, of ga direct naar
+          <span class="Chip">/extensions/</span>.
+        </p>
+        <p>
+          Zorg dat je ingelogd bent op
+          <span class="Chip">codequest.stichtingpraktijkleren.nl</span>,
+          en ga naar de homepagina van de site. De extensie doet de rest.
+        </p>
+      </template>
+    </div>
+  </article>
+
+  <footer class="Foot">
+    <nav class="FootNav" aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/tools/">Tools</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <p>Rocmn Cheats, credits naar SamK</p>
+  </footer>
+
+</div>
+
+<div class="Mod" id="Mod" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="ModBg" data-mod-close></div>
+  <div class="ModPan" role="document">
+    <div class="ModHead">
+      <h2 class="ModTitle" id="ModTitle">Downloaden</h2>
+      <button class="ModClose" type="button" aria-label="Sluiten" data-mod-close>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="ModBody" id="ModBody"></div>
+    <div class="ModActs">
+      <button class="ModBtn" type="button" data-mod-close>Sluiten</button>
+      <a class="ModBtn ModBtnPri" id="ModDl" href="#" download>
+        <i class="fa-solid fa-download" aria-hidden="true"></i>
+        Downloaden
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+const DlBase = "https://rocmn.pythonanywhere.com/download/";
+
+(() => {
+  const Ld = document.getElementById("Loader");
+  const Imgs = Array.from(document.querySelectorAll("img"));
+
+  const Wait = (I) => new Promise((Res) => {
+    if (I.complete && I.naturalWidth > 0) return Res();
+    I.addEventListener("load", Res, { once: true });
+    I.addEventListener("error", Res, { once: true });
+  });
+
+  Promise.all(Imgs.map(Wait)).then(() => {
+    setTimeout(() => {
+      Ld.classList.add("is-hidden");
+      document.body.classList.add("is-loaded");
+      setTimeout(() => Ld.remove(), 600);
+    }, 300);
+  });
+})();
+
+(() => {
+  document.querySelectorAll("[data-carousel]").forEach((Root) => {
+    const Track = Root.querySelector(".CarTrack");
+    const Slides = Root.querySelectorAll(".CarSlide");
+    const Prev = Root.querySelector(".CarNavPrev");
+    const Next = Root.querySelector(".CarNavNext");
+    const Dots = Root.querySelectorAll(".CarDot");
+    const Tot = Slides.length;
+    let Ix = 0;
+
+    const Draw = () => {
+      Track.style.transform = "translateX(" + (-Ix * 100) + "%)";
+
+      Dots.forEach((D, I) => {
+        D.classList.toggle("is-active", I === Ix);
+      });
+
+      if (Tot <= 1) {
+        Prev.style.display = "none";
+        Next.style.display = "none";
+      } else {
+        Prev.disabled = Ix === 0;
+        Next.disabled = Ix === Tot - 1;
+      }
+    };
+
+    const Go = (I) => {
+      Ix = Math.max(0, Math.min(Tot - 1, I));
+      Draw();
+    };
+
+    Prev.addEventListener("click", () => Go(Ix - 1));
+    Next.addEventListener("click", () => Go(Ix + 1));
+
+    Dots.forEach((D) => {
+      D.addEventListener("click", () => {
+        Go(parseInt(D.dataset.index, 10));
+      });
+    });
+
+    Root.addEventListener("keydown", (E) => {
+      if (E.key === "ArrowLeft")  Go(Ix - 1);
+      if (E.key === "ArrowRight") Go(Ix + 1);
+    });
+
+    Draw();
+  });
+})();
+
+(() => {
+  const Nav = document.getElementById("Side");
+  if (!Nav) return;
+
+  const Dots = Array.from(Nav.querySelectorAll(".SideDot"));
+  const Tools = Dots.map((D) => document.getElementById(D.dataset.target));
+
+  Dots.forEach((D) => {
+    D.addEventListener("click", () => {
+      const T = document.getElementById(D.dataset.target);
+      if (T) T.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  const Upd = () => {
+    const Mid = window.innerHeight / 2;
+    let Best = 0;
+    let BestD = Infinity;
+
+    Tools.forEach((El, I) => {
+      if (!El) return;
+      const R = El.getBoundingClientRect();
+      const M = (R.top + R.bottom) / 2;
+      const D = Math.abs(M - Mid);
+      if (R.bottom > 0 && R.top < window.innerHeight && D < BestD) {
+        BestD = D;
+        Best = I;
+      }
+    });
+
+    Dots.forEach((D, I) => {
+      D.classList.toggle("is-active", I === Best);
+    });
+  };
+
+  let Tick = false;
+  window.addEventListener("scroll", () => {
+    if (!Tick) {
+      window.requestAnimationFrame(() => {
+        Upd();
+        Tick = false;
+      });
+      Tick = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", Upd);
+  Upd();
+})();
+
+(() => {
+  const Mod = document.getElementById("Mod");
+  const ModT = document.getElementById("ModTitle");
+  const ModB = document.getElementById("ModBody");
+  const ModD = document.getElementById("ModDl");
+  let Open = false;
+
+  const Show = (T, Html, Href) => {
+    ModT.textContent = T;
+    ModB.innerHTML = Html;
+    ModD.setAttribute("href", Href);
+    Mod.classList.add("is-open");
+    Mod.setAttribute("aria-hidden", "false");
+    Open = true;
+    document.body.style.overflow = "hidden";
+  };
+
+  const Hide = () => {
+    Mod.classList.remove("is-open");
+    Mod.setAttribute("aria-hidden", "true");
+    Open = false;
+    document.body.style.overflow = "";
+  };
+
+  Mod.addEventListener("click", (E) => {
+    if (E.target.closest("[data-mod-close]")) Hide();
+  });
+
+  document.addEventListener("keydown", (E) => {
+    if (E.key === "Escape" && Open) Hide();
+  });
+
+  document.querySelectorAll(".ToolAct[data-dl]").forEach((Btn) => {
+    Btn.addEventListener("click", () => {
+      const File = Btn.dataset.dl;
+      if (!File) return;
+
+      const Href = DlBase + File;
+      const Use = Btn.dataset.mod === "1";
+      const T = Btn.dataset.modT || "Downloaden";
+      const TplId = Btn.dataset.modTpl;
+      let Html = "";
+
+      if (TplId) {
+        const Tpl = document.getElementById(TplId);
+        if (Tpl) Html = Tpl.innerHTML.trim();
+      }
+
+      if (Use && Html) {
+        Show(T, Html, Href);
+      } else {
+        const A = document.createElement("a");
+        A.href = Href;
+        A.download = "";
+        document.body.appendChild(A);
+        A.click();
+        document.body.removeChild(A);
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
