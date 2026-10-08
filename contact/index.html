@@ -104,10 +104,7 @@ p + p{margin-top:0.85rem}
   font-size:clamp(2rem,3.6vw,3.5rem);
   font-weight:700;
   letter-spacing:-0.03em;
-  background:linear-gradient(180deg,#ffffff 0%,#c8c8d0 130%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+  color:var(--T1);
   margin-bottom:0.6em;
 }
 .HeadLead{
@@ -214,6 +211,47 @@ p + p{margin-top:0.85rem}
 .Toast.is-visible{
   opacity:1;
   transform:translateX(-50%) translateY(0);
+}
+
+@media (max-width:900px){
+  :root{
+    --PadX:5vw;
+    --PadY:4vh;
+    --PageMax:100vw;
+    --Cont:100%;
+    --Base:clamp(15px, 4vw, 18px);
+  }
+  .Page{
+    padding-inline:var(--PadX);
+  }
+  .Head{
+    margin-top:4vh;
+    margin-bottom:4vh;
+  }
+  .HeadTitle{
+    font-size:clamp(1.75rem,8vw,2.5rem);
+    letter-spacing:-0.03em;
+  }
+  .HeadLead{
+    font-size:1em;
+    max-width:100%;
+  }
+  .Copy{
+    padding:0.6em 0.6em 0.6em 1em;
+  }
+  .CopyVal{
+    font-size:0.95em;
+  }
+  .CopyBtn{
+    width:2.6em;
+    height:2.6em;
+  }
+}
+
+@media (max-width:420px){
+  .CopyVal{
+    font-size:0.9em;
+  }
 }
 </style>
 </head>
